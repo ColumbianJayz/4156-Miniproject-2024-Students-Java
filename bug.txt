@@ -1,0 +1,1 @@
+Line 112 on Department.java: The bug was that the result.toString() was in "";
