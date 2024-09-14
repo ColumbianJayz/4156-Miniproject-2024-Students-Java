@@ -1,11 +1,11 @@
 package dev.coms4156.project.individualproject;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ContextConfiguration;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**
  * These are where all the unit tests are.
@@ -13,10 +13,19 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 @SpringBootTest
 @ContextConfiguration
 public class CourseUnitTests {
+  public static int enrollmentCapacity;
 
   @BeforeAll
   public static void setupCourseForTesting() {
     testCourse = new Course("Griffin Newbold", "417 IAB", "11:40-12:55", 250);
+  }
+
+  @Test
+  public void isCourseFullTest() {
+    testCourse.setEnrolledStudentCount(251);
+    boolean expectedResponse = true;
+    boolean actualResponse = testCourse.isCourseFull();
+    assertEquals(expectedResponse, actualResponse);
   }
 
   /*
@@ -29,6 +38,7 @@ public class CourseUnitTests {
   public void toStringTest() {
     String expectedResult = "\nInstructor: Griffin Newbold; Location: 417 IAB; Time: 11:40-12:55";
     assertEquals(expectedResult, testCourse.toString());
+    testCourse.setEnrolledStudentCount(10);
   }
 
   @Test
@@ -38,6 +48,13 @@ public class CourseUnitTests {
     assertEquals(expectedResult, enrollTest);
   }
 
+  @Test 
+  public void dropStudentTestFail() {
+    testCourse.setEnrolledStudentCount(0);
+    boolean testAnswer = true;
+    assertEquals(testAnswer, testCourse.dropStudent());
+  }
+  
 
   @Test
   public void getCourseLocationTest() {
