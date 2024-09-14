@@ -83,7 +83,8 @@ public class Course implements Serializable {
   *
   * @return A string with the instructor name, location, and time for a course.
   */
-
+  
+  @Override
   public String toString() {
     return "\nInstructor: " + instructorName +  "; Location: "  
       + courseLocation +  "; Time: " + courseTimeSlot;
@@ -131,7 +132,7 @@ public class Course implements Serializable {
   */
 
   public boolean isCourseFull() {
-    return enrollmentCapacity > enrolledStudentCount;
+    return enrollmentCapacity < enrolledStudentCount;
   }
 
   @Serial
